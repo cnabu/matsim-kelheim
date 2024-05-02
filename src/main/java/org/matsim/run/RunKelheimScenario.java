@@ -48,6 +48,7 @@ import org.matsim.core.config.groups.RoutingConfigGroup;
 import org.matsim.core.config.groups.VspExperimentalConfigGroup;
 import org.matsim.core.controler.AbstractModule;
 import org.matsim.core.controler.Controler;
+import org.matsim.core.controler.OutputDirectoryHierarchy;
 import org.matsim.core.router.AnalysisMainModeIdentifier;
 import org.matsim.core.scoring.functions.ScoringParametersForPerson;
 import org.matsim.drtFare.KelheimDrtFareModule;
@@ -149,6 +150,7 @@ public class RunKelheimScenario extends MATSimApplication {
 		config.controller().setOutputDirectory(sample.adjustName(config.controller().getOutputDirectory()));
 		config.plans().setInputFile(sample.adjustName(config.plans().getInputFile()));
 		config.controller().setRunId(sample.adjustName(config.controller().getRunId()));
+		config.controller().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.deleteDirectoryIfExists);
 
 		config.qsim().setFlowCapFactor(sample.getSize() / 100.0);
 		config.qsim().setStorageCapFactor(sample.getSize() / 100.0);
