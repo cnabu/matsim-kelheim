@@ -1,5 +1,6 @@
 package org.matsim.analysis.emissions;
 
+import org.apache.poi.hssf.record.common.FtrHeader;
 import org.matsim.api.core.v01.TransportMode;
 import org.matsim.api.core.v01.network.Link;
 import org.matsim.contrib.emissions.EmissionModule;
@@ -27,12 +28,13 @@ public class SimpleEmissionsScript {
 
 		// set files
 		var config = ConfigUtils.createConfig();
-		config.vehicles().setVehiclesFile("https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/kelheim/kelheim-v3.0/output/1pct/kelheim-v3.0-1pct.output_vehicles.xml.gz");
-		config.network().setInputFile("https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/kelheim/kelheim-v3.0/output/1pct/kelheim-v3.0-1pct.output_network.xml.gz");
-		config.transit().setTransitScheduleFile("https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/kelheim/kelheim-v3.0/output/1pct/kelheim-v3.0-1pct.output_transitSchedule.xml.gz");
-		config.transit().setVehiclesFile("https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/kelheim/kelheim-v3.0/output/1pct/kelheim-v3.0-1pct.output_transitVehicles.xml.gz");
+		config.vehicles().setVehiclesFile("C:/Users/arsal/Documents/IntelliJProject/matsim-kelheim/output/output-kelheim-v3.1-1pct-iter_1/kelheim-v3.1-1pct-iter_1.output_vehicles.xml.gz");
+		config.network().setInputFile("C:/Users/arsal/Documents/IntelliJProject/matsim-kelheim/output/output-kelheim-v3.1-1pct-iter_1/kelheim-v3.1-1pct-iter_1.output_network.xml.gz");
+		config.transit().setTransitScheduleFile("C:/Users/arsal/Documents/IntelliJProject/matsim-kelheim/output/output-kelheim-v3.1-1pct-iter_1/kelheim-v3.1-1pct-iter_1.output_transitSchedule.xml.gz");
+		config.transit().setVehiclesFile("C:/Users/arsal/Documents/IntelliJProject/matsim-kelheim/output/output-kelheim-v3.1-1pct-iter_1/kelheim-v3.1-1pct-iter_1.output_transitVehicles.xml.gz");
 		config.plans().setInputFile(null);
 		config.global().setCoordinateSystem("EPSG:25832");
+		config.eventsManager().setSynchronizeOnSimSteps(true);
 		config.eventsManager().setNumberOfThreads(null);
 		config.eventsManager().setEstimatedNumberOfEvents(null);
 		config.global().setNumberOfThreads(1);
@@ -91,10 +93,10 @@ public class SimpleEmissionsScript {
 		// process
 		var manager = EventsUtils.createEventsManager();
 		var emissionModule = new EmissionModule(scenario, manager);
-		var writer = new EventWriterXML("/Users/janek/Downloads/output_events.xml.gz");
+		var writer = new EventWriterXML("C:/Users/arsal/Documents/IntelliJProject/matsim-kelheim/output/my_emissions.xml.gz");
 		manager.initProcessing();
 		manager.addHandler(writer);
-		EventsUtils.readEvents(manager, "https://svn.vsp.tu-berlin.de/repos/public-svn/matsim/scenarios/countries/de/kelheim/kelheim-v3.0/output/1pct/kelheim-v3.0-1pct.output_events.xml.gz");
+		EventsUtils.readEvents(manager, "C:/Users/arsal/Documents/IntelliJProject/matsim-kelheim/output/output-kelheim-v3.1-1pct-iter_1/kelheim-v3.1-1pct-iter_1.output_events.xml.gz");
 		manager.finishProcessing();
 	}
 }
